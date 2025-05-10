@@ -9,7 +9,7 @@ const Footer: React.FC = () => {
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <ShieldCheck className="h-6 w-6 text-purple-400" />
-            <span className="font-bold text-lg">PassLock</span>
+            <span className="font-bold text-lg">CybRescue</span>
           </div>
           
           <nav className="flex items-center gap-6">
@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
             This is a static demo site. No passwords are stored or transmitted.
           </p>
           <p>
-            © {new Date().getFullYear()} PassLock. All password operations are performed locally in your browser.
+            © {new Date().getFullYear()} CybRescue. All password operations are performed locally in your browser.
           </p>
         </div>
       </div>
