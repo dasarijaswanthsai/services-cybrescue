@@ -6,8 +6,11 @@ const Header: React.FC = () => {
   return (
     <header className="w-full py-4 px-4 sm:px-6 flex justify-between items-center z-20 relative">
       <div className="flex items-center gap-2">
-        <ShieldCheck className="h-8 w-8 text-purple-400" />
-        <span className="font-bold text-xl">CybRescue</span>
+        <img 
+          src="/lovable-uploads/3d9f8525-552e-45bb-a160-4de8542fb6b6.png" 
+          alt="CybRescue Logo" 
+          className="h-8" 
+        />
       </div>
       
       <nav className="hidden md:flex items-center gap-6">

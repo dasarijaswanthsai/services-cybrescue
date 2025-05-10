@@ -1,6 +1,5 @@
 
 import React from 'react';
-import { ShieldCheck } from 'lucide-react';
 
 const Footer: React.FC = () => {
   return (
@@ -8,8 +7,11 @@ const Footer: React.FC = () => {
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
-            <ShieldCheck className="h-6 w-6 text-purple-400" />
-            <span className="font-bold text-lg">CybRescue</span>
+            <img 
+              src="/lovable-uploads/3d9f8525-552e-45bb-a160-4de8542fb6b6.png" 
+              alt="CybRescue Logo" 
+              className="h-6" 
+            />
           </div>
           
           <nav className="flex items-center gap-6">
