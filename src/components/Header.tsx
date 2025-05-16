@@ -23,7 +23,7 @@ const Header: React.FC = () => {
         <a href="#tips" className="text-sm font-medium text-gray-300 hover:text-white transition-colors">
           Password Tips
         </a>
-        <a href="#dnslookup" className="text-sm font-medium text-purple-400 hover:text-white transition-colors">
+        <a href="/dnslookup" className="text-sm font-medium text-purple-400 hover:text-white transition-colors">
           DNS Lookup
         </a>
       </nav>
