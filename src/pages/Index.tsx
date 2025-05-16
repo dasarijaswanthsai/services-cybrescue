@@ -5,6 +5,7 @@ import Hero from '@/components/Hero';
 import PasswordGenerator from '@/components/PasswordGenerator';
 import PasswordStrengthChecker from '@/components/PasswordStrengthChecker';
 import PasswordTips from '@/components/PasswordTips';
+import DnsLookup from '@/components/DnsLookup';
 import Footer from '@/components/Footer';
 
 const Index = () => {
@@ -16,6 +17,7 @@ const Index = () => {
         <PasswordGenerator />
         <PasswordStrengthChecker />
         <PasswordTips />
+        <DnsLookup />
       </main>
       <Footer />
     </div>

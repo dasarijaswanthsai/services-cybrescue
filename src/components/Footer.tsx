@@ -13,7 +13,6 @@ const Footer: React.FC = () => {
               className="h-6" 
             />
           </div>
-          
           <nav className="flex items-center gap-6">
             <a href="#generator" className="text-sm text-gray-300 hover:text-white transition-colors">
               Generator
@@ -24,9 +23,11 @@ const Footer: React.FC = () => {
             <a href="#tips" className="text-sm text-gray-300 hover:text-white transition-colors">
               Tips
             </a>
+            <a href="#dnslookup" className="text-sm text-purple-400 hover:text-white transition-colors">
+              DNS Lookup
+            </a>
           </nav>
         </div>
-        
         <div className="text-center text-sm text-gray-400">
           <p className="mb-2">
             This is a static demo site. No passwords are stored or transmitted.
