@@ -26,6 +26,9 @@ const Header: React.FC = () => {
         <a href="/dnslookup" className="text-sm font-medium text-purple-400 hover:text-white transition-colors">
           DNS Lookup
         </a>
+        <a href="/subnet-calculator" className="text-sm font-medium text-purple-400 hover:text-white transition-colors">
+          Subnet Calculator
+        </a>
       </nav>
       
       <a 
