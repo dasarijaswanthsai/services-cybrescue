@@ -8,6 +8,8 @@ const DnsLookupPage = () => (
   <div className="min-h-screen bg-black text-white flex flex-col">
     <Header />
     <main className="flex-1 flex flex-col items-center justify-start py-12 px-4">
+      {/* === TOOL (DnsLookup) MOVED TO TOP === */}
+      <DnsLookup />
       <section className="max-w-2xl w-full mb-8 bg-black/60 glass-morphism rounded-xl p-6 shadow border border-purple-800/20 animate-fade-in">
         <h1 className="text-4xl font-extrabold mb-3 text-gradient text-center">DNS Lookup</h1>
         <p className="text-gray-300 mb-4 text-center">
@@ -32,11 +34,10 @@ const DnsLookupPage = () => (
           </li>
         </ul>
         <p className="text-gray-400 text-xs mt-4 text-center">
-          Use the tool below to check these DNS records for any domain. 
+          Use the tool above to check these DNS records for any domain. 
           No data is stored.
         </p>
       </section>
-      <DnsLookup />
     </main>
     <Footer />
   </div>
