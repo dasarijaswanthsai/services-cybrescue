@@ -3,6 +3,8 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import { Boxes } from "lucide-react";
 
 type Result = {
   networkAddress: string;
@@ -97,6 +99,44 @@ function calculateSubnet(ip: string, mask: string): Result | null {
     maskBits,
   };
 }
+
+const ipClassDetails = [
+  {
+    class: "A",
+    range: "1.0.0.0 – 126.255.255.255",
+    defaultMask: "255.0.0.0 (/8)",
+    hosts: "16,777,214",
+    desc: "For large networks; starts with 1–126.",
+  },
+  {
+    class: "B",
+    range: "128.0.0.0 – 191.255.255.255",
+    defaultMask: "255.255.0.0 (/16)",
+    hosts: "65,534",
+    desc: "For medium networks; starts with 128–191.",
+  },
+  {
+    class: "C",
+    range: "192.0.0.0 – 223.255.255.255",
+    defaultMask: "255.255.255.0 (/24)",
+    hosts: "254",
+    desc: "For small networks; starts with 192–223.",
+  },
+  {
+    class: "D",
+    range: "224.0.0.0 – 239.255.255.255",
+    defaultMask: "N/A",
+    hosts: "Multicast",
+    desc: "Multicast addresses.",
+  },
+  {
+    class: "E",
+    range: "240.0.0.0 – 255.255.255.255",
+    defaultMask: "N/A",
+    hosts: "Experimental",
+    desc: "Experimental use.",
+  },
+];
 
 const recordTypeDescriptions = [
   { name: "A", desc: "Maps a hostname to IPv4 address; used in subnets to assign IPs to hosts." },
@@ -214,7 +254,36 @@ const SubnetCalculatorPage: React.FC = () => {
             </div>
           </section>
         )}
-        {/* === EXPLANATION/INTRO SECTION (No DNS record data) === */}
+        {/* === BOXES: IP Classes & Ranges === */}
+        <section className="w-full max-w-3xl my-8">
+          <h2 className="text-2xl font-bold mb-4 text-gradient flex items-center gap-2">
+            <Boxes size={28} className="text-purple-400" /> IP Address Classes & Ranges
+          </h2>
+          <div className="grid md:grid-cols-3 gap-4">
+            {ipClassDetails.map((ipclass) => (
+              <Card key={ipclass.class} className="border border-purple-800/40 bg-black/80">
+                <CardHeader className="pb-2">
+                  <CardTitle className="text-lg">
+                    Class {ipclass.class}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="text-[15px] text-gray-300 mb-2">{ipclass.desc}</div>
+                  <div className="text-xs text-purple-400 mb-1">
+                    <b>Range:</b> {ipclass.range}
+                  </div>
+                  <div className="text-xs mb-1">
+                    <b>Default Mask:</b> {ipclass.defaultMask}
+                  </div>
+                  <div className="text-xs mb-1">
+                    <b>Hosts:</b> {ipclass.hosts}
+                  </div>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </section>
+        {/* === EXPLANATION/INTRO SECTION (no DNS info) === */}
         <section className="max-w-3xl w-full mb-8 bg-black/60 glass-morphism rounded-xl p-6 shadow border border-purple-800/20 animate-fade-in">
           <h1 className="text-4xl font-extrabold mb-3 text-gradient text-center">
             Subnet Calculator
