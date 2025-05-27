@@ -181,7 +181,36 @@ const SubnetCalculatorPage: React.FC = () => {
     <div className="min-h-screen bg-black text-white flex flex-col">
       <Header />
       <main className="flex-1 flex flex-col items-center justify-start py-12 px-4">
-        {/* === SUBNET CALCULATOR TOOL (Form/results) MOVED TO TOP === */}
+        {/* === Heading moved to top === */}
+        <section className="max-w-3xl w-full mb-8 bg-black/60 glass-morphism rounded-xl p-6 shadow border border-purple-800/20 animate-fade-in">
+          <h1 className="text-4xl font-extrabold mb-3 text-gradient text-center">
+            Subnet Calculator
+          </h1>
+          <p className="text-gray-300 mb-4 text-center">
+            <span className="font-semibold">Subnetting</span> divides a large network into smaller, manageable <b>subnets</b>.
+            Subnets help organize and secure networks by grouping and isolating devices.
+          </p>
+          <ul className="text-gray-400 text-sm mb-1 list-disc pl-6">
+            <li>
+              <b>Network Address</b>: Identifies the subnet itself, first address in the range.
+            </li>
+            <li>
+              <b>Broadcast Address</b>: Used to communicate with all hosts in the subnet.
+            </li>
+            <li>
+              <b>Subnet Mask</b>: Defines the size of the subnet (example: <span className="text-purple-300">255.255.255.0</span> or <span className="text-purple-300">/24</span>).
+            </li>
+            <li>
+              <b>Usable Hosts</b>: The number of addresses that can be assigned to devices (excludes network/broadcast).
+            </li>
+          </ul>
+          <p className="text-gray-400 text-xs mt-4 text-center">
+            Enter an <b>IPv4 address</b> and <b>subnet mask</b> (e.g., <span className="text-purple-300">255.255.255.0</span> or <span className="text-purple-300">/24</span>).
+          </p>
+        </section>
+        {/* Moved Explanation/Intro section (with heading) above form */}
+
+        {/* === SUBNET CALCULATOR TOOL (Form/results) stays after heading === */}
         <form
           onSubmit={handleCalculate}
           className="max-w-xl w-full mx-auto bg-black/50 rounded-lg p-6 border border-gray-800 mb-6 shadow"
@@ -282,33 +311,6 @@ const SubnetCalculatorPage: React.FC = () => {
               </Card>
             ))}
           </div>
-        </section>
-        {/* === EXPLANATION/INTRO SECTION (no DNS info) === */}
-        <section className="max-w-3xl w-full mb-8 bg-black/60 glass-morphism rounded-xl p-6 shadow border border-purple-800/20 animate-fade-in">
-          <h1 className="text-4xl font-extrabold mb-3 text-gradient text-center">
-            Subnet Calculator
-          </h1>
-          <p className="text-gray-300 mb-4 text-center">
-            <span className="font-semibold">Subnetting</span> divides a large network into smaller, manageable <b>subnets</b>.
-            Subnets help organize and secure networks by grouping and isolating devices.
-          </p>
-          <ul className="text-gray-400 text-sm mb-1 list-disc pl-6">
-            <li>
-              <b>Network Address</b>: Identifies the subnet itself, first address in the range.
-            </li>
-            <li>
-              <b>Broadcast Address</b>: Used to communicate with all hosts in the subnet.
-            </li>
-            <li>
-              <b>Subnet Mask</b>: Defines the size of the subnet (example: <span className="text-purple-300">255.255.255.0</span> or <span className="text-purple-300">/24</span>).
-            </li>
-            <li>
-              <b>Usable Hosts</b>: The number of addresses that can be assigned to devices (excludes network/broadcast).
-            </li>
-          </ul>
-          <p className="text-gray-400 text-xs mt-4 text-center">
-            Enter an <b>IPv4 address</b> and <b>subnet mask</b> (e.g., <span className="text-purple-300">255.255.255.0</span> or <span className="text-purple-300">/24</span>).
-          </p>
         </section>
       </main>
       <Footer />
