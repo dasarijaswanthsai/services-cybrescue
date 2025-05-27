@@ -145,6 +145,24 @@ const recordTypeDescriptions = [
   { name: "MX", desc: "Mail exchange, for email delivery (not subnet-specific, but network-related)." },
 ];
 
+// Utility: compute wildcard mask from mask bits
+function wildcardMask(bits: number) {
+  // Invert the subnet mask
+  const mask = maskFromBits(bits);
+  const inv = (~mask) >>> 0;
+  return intToIpv4String(inv);
+}
+
+// Utility: count total IP addresses for the given subnet
+function totalIpCount(bits: number) {
+  return 2 ** (32 - bits);
+}
+
+// Utility: create the range as start~end string
+function ipRange(start: string, end: string) {
+  return `${start} ~ ${end}`;
+}
+
 const SubnetCalculatorPage: React.FC = () => {
   const [ip, setIp] = useState("");
   const [mask, setMask] = useState("");
@@ -210,7 +228,6 @@ const SubnetCalculatorPage: React.FC = () => {
         </section>
         {/* Moved Explanation/Intro section (with heading) above form */}
 
-        {/* === SUBNET CALCULATOR TOOL (Form/results) stays after heading === */}
         <form
           onSubmit={handleCalculate}
           className="max-w-xl w-full mx-auto bg-black/50 rounded-lg p-6 border border-gray-800 mb-6 shadow"
@@ -249,38 +266,72 @@ const SubnetCalculatorPage: React.FC = () => {
           )}
         </form>
         {result && (
-          <section className="max-w-xl w-full bg-black/60 rounded-lg p-6 border border-purple-800 shadow text-left animate-fade-in duration-300 mb-8">
-            <h2 className="text-2xl font-bold mb-2 text-purple-300">Subnet Details</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-2 text-lg">
-              <div>
-                <span className="font-semibold">Network Address:</span>
-                <span className="ml-2 text-white">{result.networkAddress}</span>
-              </div>
-              <div>
-                <span className="font-semibold">Broadcast Address:</span>
-                <span className="ml-2 text-white">{result.broadcastAddress}</span>
-              </div>
-              <div>
-                <span className="font-semibold">Subnet Mask (Bits):</span>
-                <span className="ml-2 text-white">
-                  /{result.maskBits}
-                </span>
-              </div>
-              <div>
-                <span className="font-semibold">Number of Usable Hosts:</span>
-                <span className="ml-2 text-white">
-                  {result.numberOfHosts}
-                </span>
-              </div>
-              <div>
-                <span className="font-semibold">First Usable IP:</span>
-                <span className="ml-2 text-white">{result.firstHost}</span>
-              </div>
-              <div>
-                <span className="font-semibold">Last Usable IP:</span>
-                <span className="ml-2 text-white">{result.lastHost}</span>
-              </div>
+          <section className="max-w-2xl w-full bg-black/60 rounded-lg p-6 border border-purple-800 shadow text-left animate-fade-in duration-300 mb-8">
+            <h2 className="text-2xl font-bold mb-4 text-purple-300">Subnet Details</h2>
+            
+            {/* Start: Detailed Table */}
+            <div className="overflow-x-auto">
+              <Table className="bg-black/80 rounded border border-purple-700/40">
+                <TableBody>
+                  <TableRow>
+                    <TableHead>Network Address</TableHead>
+                    <TableCell>{result.networkAddress}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Broadcast Address</TableHead>
+                    <TableCell>{result.broadcastAddress}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Subnet Mask</TableHead>
+                    <TableCell>
+                      {maskFromBits(result.maskBits) !== 0
+                        ? intToIpv4String(maskFromBits(result.maskBits))
+                        : "-"}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Slash Notation (CIDR)</TableHead>
+                    <TableCell>
+                      /{result.maskBits}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Wildcard Mask</TableHead>
+                    <TableCell>
+                      {wildcardMask(result.maskBits)}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Total Addresses</TableHead>
+                    <TableCell>
+                      {totalIpCount(result.maskBits)}
+                    </TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Usable Hosts</TableHead>
+                    <TableCell>{result.numberOfHosts}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>First Usable IP</TableHead>
+                    <TableCell>{result.firstHost}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>Last Usable IP</TableHead>
+                    <TableCell>{result.lastHost}</TableCell>
+                  </TableRow>
+                  <TableRow>
+                    <TableHead>IP Range</TableHead>
+                    <TableCell>
+                      {ipRange(result.firstHost, result.lastHost)}
+                    </TableCell>
+                  </TableRow>
+                </TableBody>
+              </Table>
+              <TableCaption className="text-center pt-2">
+                All subnet details are calculated based on the entered address and mask.
+              </TableCaption>
             </div>
+            {/* End: Detailed Table */}
           </section>
         )}
         {/* === BOXES: IP Classes & Ranges === */}
